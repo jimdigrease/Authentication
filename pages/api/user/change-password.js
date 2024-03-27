@@ -1,5 +1,5 @@
-import { unstable_getServerSession } from 'next-auth/next';
-import  { authOptions }  from '../auth/[...nextauth]';
+import { getServerSession } from 'next-auth/next';
+import { authOptions }  from '../auth/[...nextauth]';
 
 import { hashPassword, verifyPassword } from '../../../helpers/auth-util';
 import { connectDB } from '../../../helpers/db-util';
@@ -10,7 +10,7 @@ async function handler(req, res) {
     return;
   }
 
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     req,
     res,
     authOptions

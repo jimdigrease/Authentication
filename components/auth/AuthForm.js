@@ -50,7 +50,6 @@ function AuthForm() {
         email: enteredEmail, 
         password: enteredPassword
       });
-      console.log(result)
 
       if (!result.error) {
         // Redirect out of auth-form

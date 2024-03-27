@@ -15,10 +15,16 @@ import { verifyPassword } from '../../../helpers/auth-util';
 // Variant for NextAuth-v4
 export const authOptions = {
   session: {
-    jwt: true
+    strategy: 'jwt'
   }, 
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
+      name: 'Credentials', 
+      credentials: {
+        email: {label: "Email", type: "email"},
+        password: { label: "Password", type: "password" }
+      },
       async authorize(credentials) {
         const client = await connectDB();
 
@@ -41,7 +47,7 @@ export const authOptions = {
 
         // If returning an object inside an authorize, NextAuth will know that 
         // authorization succeeded. And this object will be encoded in the JWT.
-        return {  email: user.email };
+        return { email: user.email, name: null, image: null };
 
       }
     })
